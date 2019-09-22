@@ -1,9 +1,13 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 5000;
+const express = require('express')
+var fs = require('fs')
+var bodyParser = require('body-parser')
+const app = express()
+const port = process.env.PORT || 5000
+
+app.use(bodyParser.json())
 
 // console.log that your server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
 // create a GET route
 app.get('/api/foodData', (req, res) => {
@@ -42,11 +46,18 @@ app.get('/api/foodData', (req, res) => {
                 costPerItem: '40'
             }
         ]
-    });
-});
+    })
+})
 
 app.get('/api/balance', (req, res) => {
     res.send({
         walletBalance: 500
-    });
-});
+    })
+})
+
+app.post('/api/authentication', (req, res) => {
+    console.log(req.body)
+    res.send({
+        isUserAlreadyRegistered: false
+    })
+})
